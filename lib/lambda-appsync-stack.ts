@@ -27,7 +27,7 @@ export class LambdaAppsyncStack extends cdk.Stack {
       value: api.graphqlUrl
     })
 
-    new cdk.CfnOutput(this , 'APIGRAPHQL_URL' , {
+    new cdk.CfnOutput(this , 'APIGRAPHQL_KEY' , {
       value: api.apiKey || ''
     })
 
@@ -41,14 +41,19 @@ export class LambdaAppsyncStack extends cdk.Stack {
 
     const lambda_data_source = api.addLambdaDataSource('lambdaDataSource' , lambdaFunction);
 
-    lambda_data_source.createResolver({
-      typeName:"Query",
-      fieldName:"notes"
-    })
+    // lambda_data_source.createResolver({
+    //   typeName:"Query",
+    //   fieldName:"notes"
+    // })
+
+    // lambda_data_source.createResolver({
+    //   typeName: 'Query',
+    //   fieldName: 'customNotes'
+    // })
 
     lambda_data_source.createResolver({
-      typeName: 'Query',
-      fieldName: 'customNotes'
+      typeName: 'Mutation',
+      fieldName: 'addProduct'
     })
 
   }

@@ -2,3 +2,17 @@ type Query{
     notes: [String]
     customNotes(title:String!): String!
 }
+
+input ProductInput{
+    name: String
+    price: Int
+}
+
+type Product{
+    name: String
+    price: Int
+}
+
+type Mutation {
+    addProduct(product: ProductInput) : Product
+}
